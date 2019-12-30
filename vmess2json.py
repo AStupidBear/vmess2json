@@ -644,19 +644,7 @@ def select_multiple(lines):
 
     print()
 
-    if not sys.stdin.isatty() and os.path.exists('/dev/tty'):
-        sys.stdin.close()
-        sys.stdin = open('/dev/tty', 'r')
-
-    if sys.stdin.isatty():
-        sel = input("Choose >>> ")
-        idx = int(sel) - 1
-    elif int(option.select) > -1:
-        idx = int(option.select) - 1
-    else:
-        raise Exception("Current session cant open a tty to select. Specify the index to --select argument.")
-
-    item = vmesses[idx]["vm"]
+    item = random.choice(vmesses)["vm"]
     
     ln = parseLink(item)
     if ln is None:
