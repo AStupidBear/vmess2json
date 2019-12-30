@@ -623,7 +623,6 @@ def fill_dns(_c):
     return _c
 
 def read_subscribe(sub_url):
-    print("Reading from subscribe ...")
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
     req =urllib.request.Request(url=sub_url,headers=headers)
     with urllib.request.urlopen(req) as response:
@@ -637,14 +636,9 @@ def select_multiple(lines):
         if _vinfo is not None:
             vmesses.append({ "ps": "[{ps}] {add}:{port}/{net}".format(**_vinfo), "vm": _v })
 
-    print("Found {} items.".format(len(vmesses)))
-
-    for i, item in enumerate(vmesses):
-        print("[{}] - {}".format(i+1, item["ps"]))
-
-    print()
-
-    item = random.choice(vmesses)["vm"]
+    vmess = random.choice(vmesses)
+    print(vmess["ps"].split('] ')[-1].split('/')[0])
+    item = vmess["vm"]
     
     ln = parseLink(item)
     if ln is None:
